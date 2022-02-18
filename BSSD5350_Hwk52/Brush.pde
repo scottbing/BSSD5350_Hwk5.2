@@ -7,17 +7,30 @@ public class Brush {
 
  public Brush(int numBristles, float radius){ 
    r = radius;
-  for(int j=0; j<2; j++, radius/=2) {
-    for(int i=0; i< numBristles; i++) {
-     float randAngle = random(360);
-     float x = (radius)/2*cos(radians(randAngle)); 
-     float y = (radius)*sin(radians(randAngle)); 
-     Bristle b = new Bristle(x, y);
-     b.moveTo(0,0);
+   for(int i=0; i< numBristles; i++) {
+     Bristle b = new Bristle();
      bristles.add(b);
     }
-  }
+    load();
  }
+ 
+ public void load() {
+    float radius = r; // preserve desired outer radius
+    int i;
+    for (i=0; i < bristles.size()/2; i++) {
+      float randAngle = random(360);
+      float x = (radius)/2*cos(radians(randAngle));
+      float y = (radius)*sin(radians(randAngle));
+      bristles.get(i).setOffset(x,y);
+    }
+    radius /=2;
+    for (; i < bristles.size(); i++) {
+      float randAngle = random(360);
+      float x = (radius)/2*cos(radians(randAngle));
+      float y = (radius)*sin(radians(randAngle));
+      bristles.get(i).setOffset(x,y);
+    }    
+  }
  
  public void setColor(color col) {
   for(int i=0; i<bristles.size(); i++) {

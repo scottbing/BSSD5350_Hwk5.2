@@ -13,14 +13,15 @@ void setup() {
  brush = new Brush(100, 20);
 } 
  
-float randAngle = random(360);
+void mousePressed(){
+  ColorPalette randomC = new ColorPalette();
+  brush.setColor(randomC.getBaseColor());
+  brush.load();
+}
 
 void draw() {
-  background(255);
+  //background(255);
   noFill();
-  ColorPalette randomC = new ColorPalette(); //random color   float cx = width/2;
-  
-  brush.setColor(0);
   brush.moveTo(mouseX, mouseY);
   brush.show();
   
